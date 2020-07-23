@@ -1,0 +1,86 @@
+.root {
+    -price-rise: #00ff22;
+    -price-fall: #ff0f00;
+}
+
+.heading {
+    -fx-font-size: 26;
+
+}
+
+.chart-background {
+    -fx-background-color: black;
+}
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.price-chart .candlestick-candle .close-above-open {
+    -fx-background-color: -price-rise;
+    -fx-stroke: -price-rise;
+}
+.price-chart .candlestick-candle .open-above-close {
+    -fx-background-color: -price-fall;
+    -fx-stroke: -price-fall;
+}
+
+.volume-chart .chart-bar.close-above-open {
+    -fx-background-color: -price-rise;
+}
+.volume-chart .chart-bar.open-above-close {
+    -fx-background-color: -price-fall;
+}
+
+.axis {
+    -fx-tick-label-font: 12 "courier new";
+    -fx-tick-label-fill: white;
+}
+
+.crosshair-line {
+    -fx-stroke: white;
+}
+.crosshair-info {
+    -fx-font: 12 "courier new";
+    -fx-text-fill: white;
+}
+.crosshair-label {
+    -fx-background-color: white, black;
+    -fx-background-insets: 0, 1;
+    -fx-font: 12 "courier new";
+    -fx-text-fill: white;
+}
+
+.loading-pane {
+    -fx-background-color: #dcdcdc
+}
+
+.trade-type {
+    -fx-font: 20 "courier new";
+    -fx-fill: skyblue;
+}
+.ticker {
+    -fx-font: 20 "courier new";
+    -fx-fill: yellow;
+}
+.ticker-info {
+    -fx-font: 20 "courier new";
+    -fx-fill: white;
+}
+
+.chart-table {
+    -fx-background-color: transparent;
+}
+.chart-table .table-cell {
+    -fx-background-color: transparent;
+    -fx-font: 11 "courier new";
+    -fx-text-fill: white;
+    -fx-text-overrun: clip;
+}
+.chart-table .table-row-cell {
+    -fx-background-color: transparent;
+}
+.chart-table .table-column {
+   -fx-background-color: transparent;
+}
+
+

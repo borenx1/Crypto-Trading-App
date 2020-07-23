@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<?import bx.cryptogui.control.BarChart2?>
+<?import bx.cryptogui.control.DateAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.LineChart?>
+
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="bx.cryptogui.MainController"
+          prefHeight="900.0" prefWidth="1600.0">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+    <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+        <Menu text="File">
+            <MenuItem text="Exit" />
+        </Menu>
+    </MenuBar>
+    <TabPane fx:id="exchangeTabPane" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100"
+             GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <Tab fx:id="wexTab" text="WEX">
+            <fx:include fx:id="wexExchange" source="exchange_pane.fxml" />
+        </Tab>
+        <Tab fx:id="bitstampTab" text="Bitstamp">
+            <fx:include fx:id="bitstampExchange" source="exchange_pane.fxml" />
+        </Tab>
+        <Tab fx:id="coinbaseTab" text="Coinbase">
+            <fx:include fx:id="coinbaseExchange" source="exchange_pane.fxml" />
+        </Tab>
+        <Tab fx:id="cryptopiaTab" text="Cryptopia">
+            <fx:include fx:id="cryptopiaExchange" source="exchange_pane.fxml" />
+        </Tab>
+        <Tab fx:id="kiwicoinTab" text="Kiwi-Coin">
+            <fx:include fx:id="kiwicoinExchange" source="exchange_pane.fxml" />
+        </Tab>
+    </TabPane>
+    <fx:include fx:id="settings" source="settings.fxml"
+                GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <stylesheets>
+        <URL value="@main-style.css" />
+    </stylesheets>
+
+</GridPane>

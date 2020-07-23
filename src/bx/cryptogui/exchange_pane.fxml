@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import bx.cryptogui.data.CurrencyPair?>
+<?import bx.cryptogui.control.TableColumnFactories?>
+<?import javafx.scene.web.WebView?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="bx.cryptogui.ExchangePaneController">
+    <VBox alignment="TOP_CENTER" spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+        </padding>
+        <Text text="Graph" textAlignment="CENTER" styleClass="heading" />
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Currency Pair: " />
+            <ChoiceBox fx:id="currencyChoice" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+        </HBox>
+        <Button fx:id="updateButton" text="UPDATE" maxWidth="Infinity" />
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Last Updated: " />
+            <Label fx:id="lastUpdatedText" />
+        </HBox>
+        <Separator orientation="HORIZONTAL" />
+        <Text text="Account Info" styleClass="heading" />
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Account: " />
+            <Label fx:id="accountText" text="None" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+            <Button fx:id="loadAccountButton" text="Load" />
+        </HBox>
+        <Text text="Balance" />
+        <GridPane hgap="6" vgap="6">
+            <Label text="BTC: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label fx:id="btcBalanceText" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label text="LTC: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label fx:id="ltcBalanceText" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="USD: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label fx:id="usdBalanceText" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="NZD: " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label fx:id="nzdBalanceText" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        </GridPane>
+        <HBox spacing="6" alignment="CENTER_LEFT">
+            <Label text="Last Updated: " />
+            <Label fx:id="accountUpdatedText" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+            <ProgressIndicator fx:id="accountUpdateProgress" prefWidth="20" prefHeight="20" visible="false" />
+            <Button fx:id="accountUpdateButton" text="UPDATE" />
+        </HBox>
+        <Text text="Manual Trading" />
+        <GridPane hgap="6" vgap="6">
+            <Label text="Type: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <HBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <fx:define>
+                    <ToggleGroup fx:id="buySellToggleGroup" />
+                </fx:define>
+                <RadioButton fx:id="buyToggle" text="Buy" selected="true" toggleGroup="$buySellToggleGroup" />
+                <RadioButton fx:id="sellToggle" text="Sell" toggleGroup="$buySellToggleGroup" />
+            </HBox>
+            <Label text="Rate: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="tradeRateField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Amount: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS">
+                <TextField fx:id="tradeAmountField" HBox.hgrow="ALWAYS" />
+                <Button fx:id="tradeAmountMaxButton" text="Max" prefWidth="80" />
+            </HBox>
+        </GridPane>
+        <Button fx:id="placeOrderButton" text="Place Order" maxWidth="Infinity" />
+        <TabPane tabClosingPolicy="UNAVAILABLE" prefHeight="100" VBox.vgrow="ALWAYS">
+            <styleClass>
+                <TabPane fx:constant="STYLE_CLASS_FLOATING" />
+            </styleClass>
+            <Tab text="Open Orders">
+                <TableView fx:id="openOrdersTable">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                    <columns>
+                        <TableColumn text="Time" sortable="false" resizable="false">
+                            <cellValueFactory>
+                                <TableColumnFactories fx:constant="TIME_VALUE_FACTORY" />
+                            </cellValueFactory>
+                            <cellFactory>
+                                <TableColumnFactories fx:constant="TIME_FACTORY" />
+                            </cellFactory>
+                        </TableColumn>
+                        <TableColumn text="Price" sortable="false" resizable="false">
+                            <cellValueFactory>
+                                <TableColumnFactories fx:constant="PRICE_VALUE_FACTORY" />
+                            </cellValueFactory>
+                            <cellFactory>
+                                <TableColumnFactories fx:constant="PRICE_FACTORY" />
+                            </cellFactory>
+                        </TableColumn>
+                        <TableColumn text="Volume" sortable="false" resizable="false">
+                            <cellValueFactory>
+                                <TableColumnFactories fx:constant="VOLUME_VALUE_FACTORY" />
+                            </cellValueFactory>
+                            <cellFactory>
+                                <TableColumnFactories fx:constant="VOLUME_FACTORY" />
+                            </cellFactory>
+                        </TableColumn>
+                        <TableColumn text="Pair" sortable="false" resizable="false">
+                            <cellValueFactory>
+                                <TableColumnFactories fx:constant="CURRENCY_PAIR_VALUE_FACTORY" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </Tab>
+            <Tab text="Trade History">
+                <TableView fx:id="pastTradesTable">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                    <columns>
+                        <TableColumn text="Time" sortable="false" resizable="false">
+                            <cellValueFactory>
+                                <TableColumnFactories fx:constant="TIME_VALUE_FACTORY" />
+                            </cellValueFactory>
+                            <cellFactory>
+                                <TableColumnFactories fx:constant="TIME_FACTORY" />
+                            </cellFactory>
+                        </TableColumn>
+                        <TableColumn text="Price" sortable="false" resizable="false">
+                            <cellValueFactory>
+                                <TableColumnFactories fx:constant="TRANSACTION_PRICE_VALUE_FACTORY" />
+                            </cellValueFactory>
+                            <cellFactory>
+                                <TableColumnFactories fx:constant="TRANSACTION_PRICE_FACTORY" />
+                            </cellFactory>
+                        </TableColumn>
+                        <TableColumn text="Volume" sortable="false" resizable="false">
+                            <cellValueFactory>
+                                <TableColumnFactories fx:constant="VOLUME_VALUE_FACTORY" />
+                            </cellValueFactory>
+                            <cellFactory>
+                                <TableColumnFactories fx:constant="VOLUME_FACTORY" />
+                            </cellFactory>
+                        </TableColumn>
+                        <TableColumn text="Pair" sortable="false" resizable="false">
+                            <cellValueFactory>
+                                <TableColumnFactories fx:constant="CURRENCY_PAIR_VALUE_FACTORY" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </Tab>
+        </TabPane>
+        <TextArea fx:id="messageView" editable="false" prefWidth="10" prefHeight="50" VBox.vgrow="ALWAYS" />
+    </VBox>
+    <fx:include fx:id="chartPane" source="chart_pane.fxml" styleClass="chart-background"
+                GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="ALWAYS" />
+</GridPane>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import bx.cryptogui.control.CandleStickChart?>
+<?import bx.cryptogui.control.DateAxis?>
+<?import bx.cryptogui.control.TableColumnFactories?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import bx.cryptogui.control.BarChart2?>
+<?import bx.cryptogui.control.Crosshair?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="bx.cryptogui.ChartPaneController">
+    <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+        <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+        </padding>
+        <Label text="Time Interval: " style="-fx-text-fill: white;" />
+        <ChoiceBox fx:id="timeIntervalChoice" />
+    </HBox>
+    <StackPane GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+        <VBox>
+            <CandleStickChart fx:id="priceChart" legendVisible="false" horizontalGridLinesVisible="false" verticalGridLinesVisible="false"
+                              styleClass="price-chart" VBox.vgrow="ALWAYS">
+                <xAxis>
+                    <DateAxis styleClass="time-axis" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" side="RIGHT" autoRanging="false" forceZeroInRange="false" minorTickVisible="false" />
+                </yAxis>
+            </CandleStickChart>
+            <BarChart2 fx:id="volumeChart" legendVisible="false" horizontalGridLinesVisible="false" verticalGridLinesVisible="false"
+                       styleClass="volume-chart">
+                <xAxis>
+                    <DateAxis fx:id="tAxis" autoRanging="false" maxTickMarks="10" styleClass="time-axis" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="vAxis" side="RIGHT" autoRanging="false" minorTickVisible="false" />
+                </yAxis>
+            </BarChart2>
+        </VBox>
+        <Crosshair fx:id="crosshair" infoAlignment="TOP_LEFT" HLabelSide="RIGHT" VLabelSide="BOTTOM" />
+        <VBox alignment="CENTER" fx:id="chartLoadingPane" spacing="6.0" styleClass="loading-pane"
+              maxWidth="-Infinity" maxHeight="-Infinity" visible="false">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <ProgressIndicator fx:id="chartLoadingProgress" progress="0" />
+            <Label fx:id="chartLoadingText" textAlignment="CENTER" />
+        </VBox>
+    </StackPane>
+    <VBox alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="NEVER">
+        <Text text="Live Ticker" styleClass="ticker-info">
+            <VBox.margin>
+                <Insets top="6" right="6" bottom="6" left="6" />
+            </VBox.margin>
+        </Text>
+        <Text fx:id="tradePlatformText" styleClass="trade-type">
+            <VBox.margin>
+                <Insets top="6" right="6" bottom="6" left="6" />
+            </VBox.margin>
+        </Text>
+        <Text fx:id="tickerPrice" styleClass="ticker">
+            <VBox.margin>
+                <Insets top="6" right="6" bottom="6" left="6" />
+            </VBox.margin>
+        </Text>
+        <Text fx:id="tickerVolume" styleClass="ticker-info">
+            <VBox.margin>
+                <Insets top="6" right="6" bottom="6" left="6" />
+            </VBox.margin>
+        </Text>
+        <Text fx:id="tickerTime" styleClass="ticker-info">
+            <VBox.margin>
+                <Insets top="0" right="6" bottom="6" left="6" />
+            </VBox.margin>
+        </Text>
+        <TableView fx:id="buyOrders" styleClass="chart-table">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+            <columns>
+                <TableColumn text="Price" sortable="false" resizable="false" prefWidth="70">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="PRICE_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="PRICE_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn text="Volume" sortable="false" resizable="false">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="VOLUME_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="VOLUME_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn text="Volume2" sortable="false" resizable="false">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="PRICED_VOLUME_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="PRICED_VOLUME_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <TableView fx:id="sellOrders" styleClass="chart-table">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+            <columns>
+                <TableColumn text="Price" sortable="false" resizable="false" prefWidth="70">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="PRICE_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="PRICE_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn text="Volume" sortable="false" resizable="false">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="VOLUME_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="VOLUME_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn text="Volume2" sortable="false" resizable="false">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="PRICED_VOLUME_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="PRICED_VOLUME_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <TableView fx:id="pastTrades" styleClass="chart-table">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+            <columns>
+                <TableColumn text="Time" sortable="false" resizable="false" prefWidth="64">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="TIME_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="TIME_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn text="Price" sortable="false" resizable="false">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="TRANSACTION_PRICE_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="TRANSACTION_PRICE_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+                <TableColumn text="Volume" sortable="false" resizable="false">
+                    <cellValueFactory>
+                        <TableColumnFactories fx:constant="VOLUME_VALUE_FACTORY" />
+                    </cellValueFactory>
+                    <cellFactory>
+                        <TableColumnFactories fx:constant="VOLUME_FACTORY" />
+                    </cellFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </VBox>
+</GridPane>

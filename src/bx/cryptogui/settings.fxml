@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<?import bx.cryptogui.control.ExchangeUpdatePane?>
+<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bx.cryptogui.SettingsController"
+      spacing="6.0">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10" />
+    </padding>
+    <Text text="Graph Settings" styleClass="heading" />
+    <HBox alignment="CENTER_LEFT">
+        <Label text="Max Candles: " />
+        <Spinner fx:id="maxCandlesSpinner" HBox.hgrow="ALWAYS">
+            <valueFactory>
+                <SpinnerValueFactory.IntegerSpinnerValueFactory min="100" max="1000" amountToStepBy="100" initialValue="500" />
+            </valueFactory>
+        </Spinner>
+        <Button fx:id="maxCandlesButton" text="Set" HBox.hgrow="ALWAYS" />
+    </HBox>
+    <Label text="test graph settings" />
+    <Label text="another one" />
+    <Label text="another one" />
+    <Label text="another one" />
+    <Label text="another one" />
+    <Separator />
+    <Text text="Database Updater" styleClass="heading" />
+    <GridPane hgap="6" vgap="6">
+        <Label text="Last updated: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="databaseUpdateText" maxWidth="Infinity"
+               GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="ALWAYS" />
+        <ProgressIndicator fx:id="databaseUpdateProgress" prefWidth="24" prefHeight="24" visible="false"
+                           GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Label text="Auto update rate: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label fx:id="updateRateText" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="2" />
+        <Label fx:id="updateSliderText"
+               GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" />
+        <Slider fx:id="updateSlider" min="5" max="900" blockIncrement="1" value="180"
+                GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Button fx:id="updateRateButton" text="Set" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+    </GridPane>
+    <GridPane hgap="6" vgap="6">
+        <Text text="Exchange Last Updated"
+              GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+        <Label text="WEX: " GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <ExchangeUpdatePane fx:id="wexUpdatePane" spacing="6"
+                            GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
+        <Label text="Bitstamp: " GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <ExchangeUpdatePane fx:id="bitstampUpdatePane" spacing="6"
+                            GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <Label text="Coinbase: " GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <ExchangeUpdatePane fx:id="coinbaseUpdatePane" spacing="6"
+                            GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Label text="Cryptopia: " GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <ExchangeUpdatePane fx:id="cryptopiaUpdatePane" spacing="6"
+                            GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <Label text="Kiwi-Coin: " GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+        <ExchangeUpdatePane fx:id="kiwicoinUpdatePane" spacing="6"
+                            GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+    </GridPane>
+    <Button fx:id="updateDatabaseButton" text="UPDATE NOW" maxWidth="Infinity" prefHeight="30" />
+    <Separator />
+    <Text text="Log" styleClass="heading" />
+    <TextArea fx:id="messageLog" wrapText="true" editable="false" prefWidth="10" prefHeight="50" VBox.vgrow="ALWAYS" />
+</VBox>
