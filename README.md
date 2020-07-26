@@ -19,7 +19,7 @@ Develop a windows GUI using the JavaFX framework
 -	View trade history and open orders from multiple exchanges
 -	Trade (manual and auto) using APIs and key-secrets
 -	Periodically update a database with trade history
--	Introduction to HTTP requests with APIs, MVC and multithreading
+-	Introduction to HTTP requests with REST APIs, MVC and multithreading
 -	Based the trading view design on a certain website and focused on clarity of information
 -	Developed custom candlestick chart using the base chart framework of JavaFX
 
