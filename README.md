@@ -1,6 +1,6 @@
 # Crypto-Trading-App
 
-Developed early 2018
+*Developed early 2018*
 
 ## Instructions
 
