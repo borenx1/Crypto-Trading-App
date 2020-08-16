@@ -28,3 +28,6 @@ Develop a windows GUI using the JavaFX framework
 -	Rethink the purpose of the application and what core features it should have, reconsider the GUI framework
 -	Integrate a machine-learning algorithm to set conditions for automatic trading, figure out how to utilities two different languages, one for the GUI and one for the machine-learning
 -	Update certain HTTP requests to get correct APIs for trade history and trading functions
+
+## Screenshots
+![Screenshot 1](https://github.com/borenx1/Crypto-Trading-App/blob/master/screenshots/1.png?raw=true)
